@@ -1,0 +1,100 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>W4-D2-API-HW</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="title-text">
+        <div class="title login">Welcome</div>
+        <div class="title signup">Join whith us</div>
+      </div>
+      <div class="form-container">
+        <div class="slide-controls">
+          <input type="radio" name="slide" id="login" checked />
+          <input type="radio" name="slide" id="signup" />
+          <label for="login" class="slide login">Login</label>
+          <label for="signup" class="slide signup">Signup</label>
+          <div class="slider-tab"></div>
+        </div>
+        <div class="form-inner">
+          <form action="#" class="login">
+            <div class="liveAlertPlaceholder"></div>
+
+            <div class="field">
+              <input
+                type="text"
+                placeholder="User Name"
+                id="userValidate"
+                required
+              />
+            </div>
+            <div class="field">
+              <input
+                type="password"
+                placeholder="Password"
+                id="passValidate"
+                required
+              />
+            </div>
+            <div class="field btn">
+              <div class="btn-layer"></div>
+              <input
+                type="submit"
+                value="Login"
+                id="logInBtn"
+                class="liveAlertBtn"
+                onclick="logIn()"
+              />
+            </div>
+            <div class="signup-link">
+              Not a member? <a href="">Signup now</a>
+            </div>
+          </form>
+          <form action="#" class="signup">
+            <div class="liveAlertPlaceholder"></div>
+
+            <div class="field">
+              <input
+                type="text"
+                placeholder="User Name"
+                id="userName"
+                required
+              />
+            </div>
+            <div class="field">
+              <input
+                type="text"
+                placeholder="Email Address"
+                id="emailAddress"
+                required
+              />
+            </div>
+            <div class="field">
+              <input
+                type="password"
+                placeholder="Password"
+                id="pass"
+                required
+              />
+            </div>
+            <div class="field btn">
+              <div class="btn-layer"></div>
+              <input
+                type="submit"
+                value="Signup"
+                id="signUpBtn"
+                class="liveAlertBtn"
+                onclick="signUp()"
+              />
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script src="style.js"></script>
+    <script src="main.js"></script>
+  </body>
+</html>

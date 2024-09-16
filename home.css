@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+    background: -webkit-linear-gradient(left, #003366, #004080, #0059b3, #0073e6);
+}
+
+nav {
+    background: #fff;
+    box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.1);
+}
+
+.nav_contener {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+
+    max-width: 1140px;
+    margin: 0 auto;
+}
+
+.nav_contener h1 {
+    font-size: xx-large;
+    font-weight: 600;
+}
+
+.user_bar a {
+    text-decoration: none;
+    background: -webkit-linear-gradient(right, #003366, #004080, #0059b3, #0073e6);
+    color: #fff;
+    border-radius: 15px;
+    font-size: 20px;
+    font-weight: 500;
+    padding: .5rem 3rem;
+}
+
+.user_bar a:hover {
+    background: -webkit-linear-gradient(right, #004080, #0059b3, #0073e6, #0072E4);
+    transition: all 0.3s ease;
+}
+
+.user_bar button {
+    text-decoration: none;
+    background: -webkit-linear-gradient(right, #662e00, #802e00, #b32e00, #e62e00);
+    color: #fff;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 500;
+    padding: .1rem 1rem;
+    border: none;
+    cursor: pointer;
+}
+
+.user_bar button:hover {
+    background: -webkit-linear-gradient(right, #802e00, #b32e00, #e62e00, #e42e00);
+    transition: all 0.3s ease;
+}
+
+.flex {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+
+.hidden {
+    display: none;
+}
+
+
+@media only screen and (max-width: 992px) {
+    .nav_contener {
+        max-width: 540px;
+        margin: 0 auto;
+    }
+}
+
+@media only screen and (max-width: 1200px) and (min-width: 992px) {
+    .nav_contener {
+        max-width: 720px;
+        margin: 0 auto;
+    }
+}
