@@ -9,7 +9,12 @@ let logInBtn = document.getElementById("logInBtn");
 let userValidate = document.getElementById("userValidate");
 let passValidate = document.getElementById("passValidate");
 
-function signUp() {
+let alertDisplayed = false;
+let wrapper = document.createElement("div");
+let mess = document.createElement("p");
+
+async function signUp() {
+  event.preventDefault();
   if (userName.value.length >= 5) {
     if (pass.value.length >= 8) {
       let validateEmail = (emailAddress) => {
@@ -18,28 +23,33 @@ function signUp() {
         );
       };
       if (validateEmail(emailAddress)) {
-        fetch(url, {
-          method: "POST",
-          body: JSON.stringify({
-            user: userName.value,
-            email: emailAddress.value,
-            pass: pass.value,
-          }),
-          headers: {
-            "Content-type": "application/json; charset=UTF-8",
-          },
-        })
-          .then((response) => response.json())
-          .then((json) => {
-            localStorage.setItem(
-              "user",
-              JSON.stringify({
-                user: userName.value,
-                email: emailAddress.value,
-              })
-            );
-            window.location.href = "./home.html";
-          });
+        let textUser = await areUserTaken(userName.value, emailAddress.value);
+        if (!textUser) {
+          fetch(url, {
+            method: "POST",
+            body: JSON.stringify({
+              user: userName.value,
+              email: emailAddress.value,
+              pass: pass.value,
+            }),
+            headers: {
+              "Content-type": "application/json; charset=UTF-8",
+            },
+          })
+            .then((response) => response.json())
+            .then((json) => {
+              localStorage.setItem(
+                "user",
+                JSON.stringify({
+                  user: userName.value,
+                  email: emailAddress.value,
+                })
+              );
+              window.location.href = "./home.html";
+            });
+        } else {
+          errorSign("Username or email is Taken!");
+        }
       } else {
         errorSign("Invalid email!");
       }
@@ -52,6 +62,7 @@ function signUp() {
 }
 
 function logIn() {
+  event.preventDefault();
   fetch(url)
     .then((response) => response.json())
     .then((json) => {
@@ -80,22 +91,26 @@ function errorSign(message) {
   let alertPlaceholder = document.getElementsByClassName(
     "liveAlertPlaceholder"
   )[1];
-  let appendAlert = (message) => {
-    let wrapper = document.createElement("div");
-    let mess = document.createElement("p");
 
-    mess.textContent = message;
-    mess.style.color = "red";
-    wrapper.appendChild(mess);
+  if (!alertDisplayed) {
+    let appendAlert = (message) => {
+      mess.textContent = message;
+      mess.style.color = "red";
+      wrapper.appendChild(mess);
 
-    alertPlaceholder.append(wrapper);
-  };
+      alertPlaceholder.append(wrapper);
+      alertDisplayed = true;
 
-  let alertTrigger = document.getElementsByClassName("liveAlertBtn")[1];
-  if (alertTrigger) {
-    alertTrigger.addEventListener("click", () => {
-      appendAlert(message);
-    });
+      setTimeout(() => {
+        wrapper.remove();
+      }, 5000);
+    };
+    let alertTrigger = document.getElementsByClassName("liveAlertBtn")[1];
+    if (alertTrigger) {
+      alertTrigger.addEventListener("click", () => {
+        appendAlert(message);
+      });
+    }
   }
 }
 
@@ -103,21 +118,35 @@ function errorLog(message) {
   let alertPlaceholder = document.getElementsByClassName(
     "liveAlertPlaceholder"
   )[0];
-  let appendAlert = (message) => {
-    let wrapper = document.createElement("div");
-    let mess = document.createElement("p");
 
-    mess.textContent = message;
-    mess.style.color = "red";
-    wrapper.appendChild(mess);
+  if (!alertDisplayed) {
+    let appendAlert = (message) => {
+      mess.textContent = message;
+      mess.style.color = "red";
+      wrapper.appendChild(mess);
 
-    alertPlaceholder.append(wrapper);
-  };
+      alertPlaceholder.append(wrapper);
+      alertDisplayed = true;
 
-  let alertTrigger = document.getElementsByClassName("liveAlertBtn")[0];
-  if (alertTrigger) {
-    alertTrigger.addEventListener("click", () => {
-      appendAlert(message);
-    });
+      setTimeout(() => {
+        wrapper.remove();
+      }, 5000);
+    };
+    let alertTrigger = document.getElementsByClassName("liveAlertBtn")[0];
+    if (alertTrigger) {
+      alertTrigger.addEventListener("click", () => {
+        appendAlert(message);
+      });
+    }
   }
+}
+
+function areUserTaken(userName, emailAddress) {
+  return fetch(url)
+    .then((response) => response.json())
+    .then((json) => {
+      return json.some(
+        (data) => data.user === userName || data.email === emailAddress
+      );
+    });
 }
