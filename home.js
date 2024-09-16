@@ -16,9 +16,12 @@ window.onload = function () {
     div.appendChild(logOut);
     userBar.appendChild(div);
   } else {
-    let hidden = document.getElementsByClassName("hidden")[0];
-    hidden.style.display = "block";
+    window.location.href = "./index.html";
   }
+  // else {
+  //   let hidden = document.getElementsByClassName("hidden")[0];
+  //   hidden.style.display = "block";
+  // }
 };
 
 function logOut() {
